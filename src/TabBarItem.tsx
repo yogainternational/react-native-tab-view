@@ -40,6 +40,8 @@ type Props<T extends Route> = {
   onLongPress: () => void;
   labelStyle?: StyleProp<TextStyle>;
   style: StyleProp<ViewStyle>;
+  styleFocused: StyleProp<ViewStyle>;
+  styleUnFocused: StyleProp<ViewStyle>;
 };
 
 const DEFAULT_ACTIVE_COLOR = 'rgba(255, 255, 255, 1)';
@@ -94,6 +96,8 @@ export default class TabBarItem<T extends Route> extends React.Component<
       pressOpacity,
       labelStyle,
       style,
+      styleFocused,
+      styleUnFocused,
       onLayout,
       onPress,
       onLongPress,
@@ -195,7 +199,12 @@ export default class TabBarItem<T extends Route> extends React.Component<
       );
     }
 
-    const tabStyle = StyleSheet.flatten(style);
+    const tabStyleFocused = styleFocused || style;
+    const tabStyleUnFocused = styleUnFocused || style;
+    const tabStyle = StyleSheet.flatten(
+      isFocused ? tabStyleFocused : tabStyleUnFocused
+    );
+
     const isWidthSet = tabStyle && tabStyle.width !== undefined;
     const tabContainerStyle: ViewStyle | null = isWidthSet ? null : { flex: 1 };
 

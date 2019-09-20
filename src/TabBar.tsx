@@ -52,6 +52,8 @@ export type Props<T extends Route> = SceneRendererProps & {
   onTabPress?: (scene: Scene<T> & Event) => void;
   onTabLongPress?: (scene: Scene<T>) => void;
   tabStyle?: StyleProp<ViewStyle>;
+  tabStyleFocused?: StyleProp<ViewStyle>;
+  tabStyleUnFocused?: StyleProp<ViewStyle>;
   indicatorStyle?: StyleProp<ViewStyle>;
   indicatorContainerStyle?: StyleProp<ViewStyle>;
   labelStyle?: StyleProp<TextStyle>;
@@ -310,6 +312,8 @@ export default class TabBar<T extends Route> extends React.Component<
       onTabPress,
       onTabLongPress,
       tabStyle,
+      tabStyleFocused,
+      tabStyleUnFocused,
       labelStyle,
       indicatorStyle,
       contentContainerStyle,
@@ -450,6 +454,8 @@ export default class TabBar<T extends Route> extends React.Component<
                 onLongPress={() => onTabLongPress && onTabLongPress({ route })}
                 labelStyle={labelStyle}
                 style={tabStyle}
+                styleFocused={tabStyleFocused}
+                styleUnFocused={tabStyleUnFocused}
               />
             ))}
           </Animated.ScrollView>
